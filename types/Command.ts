@@ -4,3 +4,4 @@ export default interface Command {
 	name: string;
 	execute: (event: ChatSendBeforeEvent) => number;
 }
+// w
