@@ -1,4 +1,4 @@
-import { BoundingBox, Dimension, MolangVariableMap, Vector, Vector3 } from "@minecraft/server";
+import { BoundingBox, BoundingBoxUtils, Dimension, MolangVariableMap, Vector, Vector3 } from "@minecraft/server";
 import VectorHelper from "./VectorHelper";
 
 export default class ParticleHelper {
@@ -15,7 +15,8 @@ export default class ParticleHelper {
 		}
 	};
 
-	public static drawCuboid = (boundingBox: BoundingBox, particle: string, dimension: Dimension) => {
+	public static drawCuboid = (boundingBox_: BoundingBox, particle: string, dimension: Dimension) => {
+		let boundingBox = BoundingBoxUtils.dilate(boundingBox_, { x: 1.5, y: 1.5, z: 1.5 });
 		const diff = Vector.subtract(boundingBox.max, boundingBox.min);
 		this.drawLine(boundingBox.min, Vector.add(boundingBox.min, { x: diff.x, y: 0, z: 0 }), particle, dimension);
 		this.drawLine(
