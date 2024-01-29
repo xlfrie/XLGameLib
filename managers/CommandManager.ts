@@ -6,10 +6,7 @@ export default class CommandManager {
 	private static config: CommandManagerConfigData;
 
 	public static registerCommand = (commands: Command[]) => {
-		this.registeredCommands = this.registeredCommands.concat(
-			this.registeredCommands,
-			commands
-		);
+		this.registeredCommands = this.registeredCommands.concat(this.registeredCommands, commands);
 		return this;
 	};
 
@@ -22,9 +19,7 @@ export default class CommandManager {
 		let message = event.message;
 		if (!message.startsWith(this.config.prefix)) return;
 
-		let commandName = message
-			.slice(this.config.prefix.length)
-			.split(" ")[0];
+		let commandName = message.slice(this.config.prefix.length).split(" ")[0];
 		event.cancel = true;
 
 		this.registeredCommands.forEach((command) => {
@@ -42,8 +37,7 @@ export default class CommandManager {
 	};
 
 	public static init = () => {
-		if (!this.config)
-			throw Error("Command Manager initialized before configured.");
+		if (!this.config) throw Error("Command Manager initialized before configured.");
 		server.world.beforeEvents.chatSend.subscribe(this.chatSendBefore);
 	};
 }
