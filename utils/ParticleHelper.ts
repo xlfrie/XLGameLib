@@ -3,12 +3,13 @@ import VectorHelper from "./VectorHelper";
 
 export default class ParticleHelper {
 	public static drawLine = (from: Vector3, to: Vector3, particle: string, dimension: Dimension, molang?: MolangVariableMap) => {
-		let dir = VectorHelper.normalize(Vector.subtract(to, from));
-		let squareLength = Vector.distance(from, to);
+		let nonNormalDir = Vector.subtract(to, from);
+		let dir = VectorHelper.normalize(nonNormalDir);
+		let squareLength = VectorHelper.dotProduct(nonNormalDir, nonNormalDir);
 		let inc = 0.5;
 		let increment = Vector.multiply(dir, inc);
 		let pos = from;
-		for (let i = 0; i * inc < squareLength; i++) {
+		for (let i = 0; i ** 2 * inc ** 2 < squareLength; i++) {
 			dimension.spawnParticle(particle, pos, molang);
 
 			pos = Vector.add(pos, increment);
