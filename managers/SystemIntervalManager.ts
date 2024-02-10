@@ -3,8 +3,12 @@ import Interval from "types/Interval";
 
 export default class SystemIntervalManager {
 	public static registerIntervals = (intevals: Interval[]) => {
+		let intervalIDs: number[] = [];
+
 		intevals.forEach((interval) => {
-			system.runInterval(interval.execute, interval.delay);
+			intervalIDs.push(system.runInterval(interval.execute, interval.delay));
 		});
+
+		return intervalIDs;
 	};
 }
