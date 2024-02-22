@@ -10,6 +10,6 @@ export default class Misc {
 			y_ = box.max.y - pos.y,
 			z_ = box.max.z - pos.z;
 
-		return x >= x_ && y >= y_ && z >= z_;
+		return x >= x_ && y >= y_ && z >= z_ && x_ > 0 && y_ > 0 && z_ > 0;
 	};
 }
