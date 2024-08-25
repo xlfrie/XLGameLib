@@ -1,4 +1,4 @@
-import { Vector3 } from "@minecraft/server";
+import { Vector } from "wrappers/Vector";
 
 export default class Matrix {
 	private matrix: number[];
@@ -29,11 +29,11 @@ export default class Matrix {
 		return this;
 	};
 
-	public transformVector = (vector: Vector3): Vector3 => {
-		return {
-			x: vector.x * this.matrix[0] + vector.y * this.matrix[3] + vector.z * this.matrix[6],
-			y: vector.x * this.matrix[1] + vector.y * this.matrix[4] + vector.z * this.matrix[7],
-			z: vector.x * this.matrix[2] + vector.y * this.matrix[6] + vector.z,
-		};
+	public transformVector = (vector: Vector): Vector => {
+		return new Vector(
+			vector.x * this.matrix[0] + vector.y * this.matrix[3] + vector.z * this.matrix[6],
+			vector.x * this.matrix[2] + vector.y * this.matrix[6] + vector.z,
+			vector.x * this.matrix[1] + vector.y * this.matrix[4] + vector.z * this.matrix[7]
+		);
 	};
 }
