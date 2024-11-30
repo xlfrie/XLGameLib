@@ -4,6 +4,7 @@ export enum LOG_LEVEL {
 	ERROR = 3,
 	WARN = 2,
 	VERBOSE = 1,
+	DEBUG = 0,
 }
 
 export default class ChatHelper {
@@ -33,6 +34,11 @@ export default class ChatHelper {
 				case LOG_LEVEL.VERBOSE:
 					world.sendMessage(
 						`<Server> ${Colors.GRAY}${Colors.BOLD}VERBOSE:${Colors.RESET} ${message}`
+					);
+					break;
+				case LOG_LEVEL.DEBUG:
+					world.sendMessage(
+						`<Server> ${Colors.DARK_GRAY}${Colors.BOLD}DEBUG:${Colors.RESET} ${message}`
 					);
 					break;
 			}
