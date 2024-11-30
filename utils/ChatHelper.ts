@@ -38,7 +38,7 @@ export default class ChatHelper {
 					break;
 				case LOG_LEVEL.DEBUG:
 					world.sendMessage(
-						`<Server> ${Colors.DARK_GRAY}${Colors.BOLD}DEBUG:${Colors.RESET} ${message}`
+						`<Server> ${Colors.DARK_GRAY}${Colors.BOLD}DEBUG:${Colors.RESET}${Colors.GRAY}${Colors.ITALIC} ${message}`
 					);
 					break;
 			}
