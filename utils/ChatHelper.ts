@@ -1,8 +1,46 @@
 import { world } from "@minecraft/server";
 
+export enum LOG_LEVEL {
+	ERROR = 3,
+	WARN = 2,
+	VERBOSE = 1,
+}
+
 export default class ChatHelper {
+	private static level: LOG_LEVEL = LOG_LEVEL.ERROR;
+
 	public static broadcastMessage = (message: string) => {
 		world.sendMessage(`<Server> ${message}`);
+	};
+
+	public static log(message: string, level?: LOG_LEVEL) {
+		if (level === undefined) {
+			level = LOG_LEVEL.VERBOSE;
+		}
+
+		if (level >= this.level) {
+			switch (level) {
+				case LOG_LEVEL.ERROR:
+					world.sendMessage(
+						`<Server> ${Colors.RED}${Colors.BOLD}ERROR:${Colors.RESET} ${message}`
+					);
+					break;
+				case LOG_LEVEL.WARN:
+					world.sendMessage(
+						`<Server> ${Colors.MATERIAL_COPPER}${Colors.BOLD}WARN:${Colors.RESET} ${message}`
+					);
+					break;
+				case LOG_LEVEL.VERBOSE:
+					world.sendMessage(
+						`<Server> ${Colors.GRAY}${Colors.BOLD}VERBOSE:${Colors.RESET} ${message}`
+					);
+					break;
+			}
+		}
+	}
+
+	public static setLogLevel = (level: LOG_LEVEL) => {
+		this.level = level;
 	};
 }
 
